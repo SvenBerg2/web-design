@@ -1,5 +1,5 @@
 # Web page Design and Development
-This is a simple dynamic website project and everyone is welcome to contribute here. You can read more at Wiki section of this project and learn about the progress and to-do-list at Projects section.
+This is a simple E Commerce website project and everyone is welcome to contribute here. You can read more at Wiki section of this project and learn about the progress and to-do-list at Projects section.
 
 If you don't know how to code, you can still participate in this project and learn a long the way. If you are a beginner, you can start from learning HTML under a few hours https://www.w3schools.com/html/ and if you wish to learn PHP https://www.w3schools.com/php/ .
 
