@@ -3,9 +3,12 @@ This is a simple dynamic website project and everyone is welcome to contribute h
 
 If you don't know how to code, you can still participate in this project and learn a long the way. If you are a beginner, you can start from learning HTML under a few hours https://www.w3schools.com/html/ and if you wish to learn PHP https://www.w3schools.com/php/ .
 
-For CSS tutorials https://www.csstutorial.net/ 
+For CSS tutorials https://www.csstutorial.net/
+
                   https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS
+                  
                   https://www.w3schools.com/css/
+                  
 
 You can download latest version of PHP and XAMPP from: https://www.apachefriends.org/download.html
 You can get up-to-date version of mySQL workbench from: https://dev.mysql.com/downloads/workbench/ It is an easy to use database design tool with diagram design. Users who want to SQL script manually can also be done from there.
