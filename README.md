@@ -3,11 +3,7 @@ This is a simple dynamic website project and everyone is welcome to contribute h
 
 If you don't know how to code, you can still participate in this project and learn a long the way. If you are a beginner, you can start from learning HTML under a few hours https://www.w3schools.com/html/ and if you wish to learn PHP https://www.w3schools.com/php/ .
 
-For CSS tutorials https://www.csstutorial.net/
-
-                  https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS
-                  
-                  https://www.w3schools.com/css/
+For CSS tutorials https://www.csstutorial.net/ , https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/ , https://www.w3schools.com/css/
                   
 
 You can download latest version of PHP and XAMPP from: https://www.apachefriends.org/download.html
