@@ -2,7 +2,6 @@
 error_reporting(0);
 session_start();
 require ('include/connect.php');
-//require ('function.php');
 if (isset($_POST['btnaddproduct'])) 
 {
 	$txtproductid=$_POST['txtproductid'];
@@ -20,7 +19,7 @@ if (isset($_POST['btnaddproduct']))
 	$image2=$_FILES['txtimage2']['name'];
 	if ($image1) 
 	{
-		$filename1=$folder.'_'.$image1;
+		$filename1=$folder.''.$image1;
 		$copied=copy($_FILES['txtimage1']['tmp_name'],$filename1);
 		if (!$copied) 
 		{
@@ -30,7 +29,7 @@ if (isset($_POST['btnaddproduct']))
 		
 	if ($image2) 
 	{
-		$filename2=$folder.'_'.$image2;
+		$filename2=$folder.''.$image2;
 		$copied=copy($_FILES['txtimage2']['tmp_name'],$filename2);
 		if (!$copied) 
 		{
@@ -114,7 +113,7 @@ if (isset($_POST['btnaddproduct']))
 		</td>
 		</tr>
 		<td>Price</td>
-		<td>£<input type="number" name="txtprice" class="search" style="width:70px;"></td>
+		<td>£<input type="number" name="txtprice" step="any" class="search" style="width:70px;"></td>
 	</tr>
 	<tr>
 		<td>Quantity</td>
