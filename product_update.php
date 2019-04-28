@@ -1,5 +1,5 @@
 <?php 
-
+	error_reporting(0);
 	session_start();
 	require ('include/connect.php');
 	if (isset($_REQUEST['product_id'])) 
@@ -38,7 +38,7 @@
 		$u_image2=$_FILES['txtimage2']['name'];
 		if ($u_image1) 
 		{
-			$filename1=$folder.'_'.$u_image1;
+			$filename1=$folder.''.$u_image1;
 			$copied=copy($_FILES['txtimage1']['tmp_name'],$filename1);
 			if (!$copied) 
 			{
@@ -47,7 +47,7 @@
 		}		
 		if ($u_image2) 
 		{
-			$filename2=$folder.'_'.$u_image2;
+			$filename2=$folder.''.$u_image2;
 			$copied=copy($_FILES['txtimage2']['tmp_name'],$filename2);
 			if (!$copied) 
 			{
@@ -67,7 +67,7 @@
 		}
 		else
 		{
-			echo "Error:".$update ."<br>".mysqli_error($con);
+			echo "Error:".$insert ."<br>".mysqli_error($con);
 		}		
 	}
  ?>
@@ -122,7 +122,7 @@
 		</td>
 		</tr>
 		<td>Price</td>
-		<td>£<input type="number" name="txtprice" value="<?php echo $txtprice ?>" style="width:70px;"></td>
+		<td>£<input type="number" name="txtprice" value="<?php echo $txtprice ?>" step="any" style="width:70px;"></td>
 	</tr>
 	<tr>
 		<td>Quantity</td>
@@ -149,7 +149,7 @@
 		<td>&nbsp;
 			<input type="submit" name="btnupdate" value="Update"/>
 			<input type="reset" value="Clear">
-			<a href="product_listing.php">Back</a>
+			<a href="product_listing.php"><input type="button" value="Back" ></a>
 		</td>
 	</tr>
 </table>
