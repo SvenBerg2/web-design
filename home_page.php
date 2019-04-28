@@ -8,16 +8,23 @@ require ('include/connect.php');
 <head>
 <title>Home Page</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="stylesheet" type="text/css" href="style2.css">
 </head>
 <body>
-<form action="home_page.php" method="post" enctype="multipart/form-data">
+<form action="home_page.php" method="post" class="bar" enctype="multipart/form-data">
+<table align="center" cellpadding="15">
+  <td></td>
+  <td><input type="text" class="textboxd1" name="txtdata"/></td>
+  <td><input type="submit" class="btnd" name="btnsearch" value="Search"/></td>
+</table>
 <table align="center">
 <tr>
 <td>
-  <ul class="menu cf">
+<ul class="menu cf">
   <li><a href="home_page.php">CD World</a></li>
   <li>
-    <a href="">Movies</a>
+    <a href="movie.php">Movies</a>
     <ul class="submenu">
       <li><a href="">Action</a></li>
       <li><a href="">Animation</a></li>
@@ -35,7 +42,7 @@ require ('include/connect.php');
       <li><a href="">Western</a></li>
     </ul>     
   </li>
-  <li><a href="">Music</a>
+  <li><a href="music.php">Music</a>
     <ul class="submenu">
       <li><a href="">Alternative</a></li>
       <li><a href="">Blues</a></li>
@@ -53,7 +60,7 @@ require ('include/connect.php');
       <li><a href="">Soundtracks</a></li>
     </ul> 
     </li>
-  <li><a href="">Games</a>
+  <li><a href="game.php">Games</a>
     <ul class="submenu">
       <li><a href="">Action</a></li>
       <li><a href="">Adventrue</a></li>
@@ -71,21 +78,79 @@ require ('include/connect.php');
     </ul>   
   </li>
   <li><a href="">ABOUT</a></li>
-  <li><a href="customer_signup.php">Sign-Up</a></li>
+<?php if (!isset($_SESSION['customer_id']))
+      {
+        echo "<li><a href='customer_signin.php'>Sign-In</a></li>";
+        echo "<li><a href='customer_signup.php'>Sign-Up</a></li>";
+      } 
+      else
+      {
+        echo "<li><a href='logout.php'>Logout</a></li>"; 
+      }
+?>
 </ul>
 </td>
 </tr>
 </table>
 <table align="center" cellpadding="15">
-<?php
-  $select="SELECT p.* FROM product p,category c
-          WHERE p.category_category_id=c.category_id AND p.status='In Stock'
+<?php 
+    if (isset($_POST['btnsearch'])) 
+    {
+      $data=$_POST['txtdata'];
+      $searchdata="Select * from product 
+                  where product_name like'%$data%'
+                    order by product_price desc";
+            $ret=mysqli_query($con,$searchdata);
+            $num_result=mysqli_num_rows($ret);
+            if ($num_result==0) 
+            {
+              echo "<script>window.alert('No match found.')</script>";
+              echo "<script>window.location='home_page.php'</script>";
+            }
+            else
+            {
+              for ($a=0; $a < $num_result; $a+=4) 
+              { 
+                $product="Select * from product 
+                  where product_name like'%$data%'
+                    order by product_price desc     
+                      LIMIT $a,4";
+                $retp=mysqli_query($con,$product);
+                $num_resultp=mysqli_num_rows($retp);
+                echo "<tr>";
+                for ($b=0; $b < $num_resultp; $b++) 
+                { 
+                  $row=mysqli_fetch_array($ret);
+                  $image1=$row['image1'];
+                  list($width, $height)=getimagesize('productimages/'.$image1);
+                  $w=$width/6;
+                  $h=$height/6;
+                  ?>
+                  <td height="330" class="ggwp">
+                    <a href="product_detail.php?product_id=<?php echo $row['product_id'] ?>">
+                    <img src="<?php echo 'productimages/'.$image1 ?>" width='<?php echo $w ?>' height='<?php echo $h ?>'/></a>
+                    <br>
+                    <b><?php echo $row['product_name']; ?></b>
+                    <br>
+                    <b>£<?php echo $row['product_price']; ?></b>
+                    <br><br>
+                  </td>
+                  <?php
+                }
+                echo "</tr>";
+              }
+            }
+          }
+          
+
+else {  $select="SELECT p.* FROM product p,category c
+          WHERE p.category_category_id=c.category_id 
           ORDER BY release_date ASC";
   $ret=mysqli_query($con,$select);
   $count7=mysqli_num_rows($ret);
   for($i=0;$i<$count7;$i+=3)
   {
-    $select1="SELECT * FROM product p,category c WHERE p.category_category_id=c.category_id AND p.status='In Stock'
+    $select1="SELECT * FROM product p,category c WHERE p.category_category_id=c.category_id 
         ORDER BY product_id ASC
         LIMIT $i,3";
         
@@ -100,23 +165,20 @@ require ('include/connect.php');
       $productname=$row['product_name'];
       $price=$row['product_price'];
       $image1=$row['image1'];  
-      //list($width,$height)=getimagesize($productimg2);
-      //$w=$width/2;
-      //$h=$height/2;
 ?>
-      <td align="center" class="bar1">
-        <a href="product_detail.php?productid=<?php echo $row['product_id'] ?>">
-        <img src="/productimages/<?php echo $image1 ?>" />
+      <td align="center" class="ggwp"/>
+        <a href="product_detail.php?product_id=<?php echo $row['product_id'] ?>">
+        <img src="<?php echo 'productimages/' .  $image1 ?>" width="100px" height="140px" />
         </a>    
         <b><h3><?php echo $productname ?> </h3></b>
-        <b><h5>£ <?php echo $price ?></h5></b>
+        <b><h5>£<?php echo $price ?></h5></b>
       </td>
     <td></td>
     <?php
     }
     echo "</tr>";
   }
-
+}
 ?>
 </table>
 </form>
